@@ -17,6 +17,13 @@ class InstallCommand extends Command
     {
 
         // NPM Packages...
+        $this->removeNodePackages([
+            "@tailwindcss/forms",
+            "alpinejs",
+            "autoprefixer",
+            "tailwindcss",
+        ]);
+
         $this->updateNodePackages(function ($packages) {
             return [
                 'bootstrap' => '^5.2.1',
@@ -54,15 +61,16 @@ class InstallCommand extends Command
         copy(__DIR__ . '/../../vite.config.js', base_path('vite.config.js'));
 
         copy(__DIR__ . '/../../favicon.ico', public_path('favicon.ico'));
+        copy(__DIR__ . '/../../LoginRequest.php', app_path('Http/Requests/Auth/LoginRequest.php'));
+        copy(__DIR__ . '/../../2014_10_12_000000_create_users_table.php', base_path('database/migrations/2014_10_12_000000_create_users_table.php'));
 
         (new Filesystem)->delete(base_path('tailwind.config.js'));
         (new Filesystem)->delete(base_path('postcss.config.js'));
-        //(new Filesystem)->delete(base_path('yarn.lock'));
-        $this->runCommands(['npm uninstall tailwindcss autoprefixer alpinejs @tailwindcss/forms']);
+
         $this->runCommands(['npm install', 'npm run build']);
 
         $this->line('');
-        $this->components->info('Breeze scaffolding installed successfully.');
+        $this->components->info('BreezeStrap installed successfully.');
     }
 
     /**
@@ -112,6 +120,30 @@ class InstallCommand extends Command
             array_key_exists($configurationKey, $packages) ? $packages[$configurationKey] : [],
             $configurationKey
         );
+
+        ksort($packages[$configurationKey]);
+
+        file_put_contents(
+            base_path('package.json'),
+            json_encode($packages, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) . PHP_EOL
+        );
+    }
+
+    protected static function removeNodePackages($rPackges, $dev = true)
+    {
+        if (!file_exists(base_path('package.json'))) {
+            return;
+        }
+
+        $configurationKey = $dev ? 'devDependencies' : 'dependencies';
+
+        $packages = json_decode(file_get_contents(base_path('package.json')), true);
+
+        foreach ($packages[$configurationKey] as $key => $item) {
+            if (in_array($key, $rPackges)) {
+                unset($packages[$configurationKey][$key]);
+            }
+        }
 
         ksort($packages[$configurationKey]);
 

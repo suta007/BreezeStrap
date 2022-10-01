@@ -1,0 +1,17 @@
+{
+    "name": "suta007/breezestrap",
+    "description": "Bootstrap for Laravel Breeze",
+    "autoload": {
+        "psr-4": {
+            "Suta007\\Breezestrap\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Kritsadapong  Suta",
+            "email": "mr.suta@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}

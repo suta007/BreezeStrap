@@ -1,5 +1,5 @@
 <?php
-namespace Suta007\BreezeStrap\Console;
+namespace Suta007\Breezestrap\Console;
 
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;

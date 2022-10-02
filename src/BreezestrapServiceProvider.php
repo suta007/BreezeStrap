@@ -1,6 +1,6 @@
 <?php
 
-namespace Suta007\BreezeStrap;
+namespace Suta007\Breezestrap;
 
 use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\ServiceProvider;

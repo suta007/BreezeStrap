@@ -3,7 +3,7 @@
     "description": "Bootstrap for Laravel Breeze",
     "autoload": {
         "psr-4": {
-            "Suta007\\Breezestrap\\": "src/"
+            "Suta007\\Breezestrap\\": "src"
         }
     },
     "authors": [
@@ -13,5 +13,12 @@
         }
     ],
     "minimum-stability": "dev",
-    "require": {}
+    "require": {},
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Suta007\\Breezestrap\\BreezestrapServiceProvider"
+            ]
+        }
+    }
 }

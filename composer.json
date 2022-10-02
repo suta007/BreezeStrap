@@ -12,7 +12,6 @@
             "email": "mr.suta@gmail.com"
         }
     ],
-    "minimum-stability": "dev",
     "require": {},
     "extra": {
         "branch-alias": {
@@ -23,5 +22,7 @@
                 "Suta007\\Breezestrap\\BreezestrapServiceProvider"
             ]
         }
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
